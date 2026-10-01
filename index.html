@@ -1593,6 +1593,25 @@
         </div>
     </section>
 
+    <!-- DYNAMIC ALBUM GALLERY SECTION -->
+    <section id="dynamic-gallery-section" class="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bdGreen-600/10 text-bdGreen-800 font-bold text-xs sm:text-sm border border-bdGreen-600/20 mb-3">
+                    <i class="fa-solid fa-images text-bdRed-500"></i>
+                    <span>নতুন আপডেট ও গ্যালারি</span>
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+                    সাম্প্রতিক কার্যক্রম ও অ্যালবাম
+                </h2>
+            </div>
+            <!-- Dynamic Albums Container -->
+            <div id="dynamicGalleryContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Albums will load here automatically -->
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER (ফুটার) -->
     <footer class="mt-auto bg-gradient-to-b from-bdGreen-900 to-slate-950 text-white border-t-4 border-bdRed-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
@@ -1704,15 +1723,96 @@
         </div>
     </div>
 
+    <!-- ================= ADMIN PANEL START ================= -->
+    <!-- Secret Admin Trigger Button -->
+    <div style="text-align: center; padding: 20px; background: #0f172a;">
+        <button onclick="document.getElementById('adminLoginModal').style.display='flex'" style="background: transparent; border: none; color: #475569; cursor: pointer; font-size: 14px; font-weight: bold;">
+            <i class="fa-solid fa-lock"></i> Admin
+        </button>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+        <div style="background: #0f172a; padding: 30px; border-radius: 20px; border: 1px solid #00a651; width: 100%; max-width: 400px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h3 style="color: #00a651; margin-bottom: 20px; font-size: 20px; font-weight: bold;">অ্যাডমিন লগইন</h3>
+            <input type="text" id="adminUser" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
+            <input type="password" id="adminPass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
+            <button onclick="adminLogin()" style="background: linear-gradient(45deg, #00a651, #007a3b); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px;">লগইন করুন</button>
+            <button onclick="document.getElementById('adminLoginModal').style.display='none'" style="background: transparent; color: #94a3b8; border: none; margin-top: 15px; cursor: pointer; font-weight: bold;">বাতিল</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 10000; overflow-y: auto; padding: 20px;">
+        <div style="max-width: 600px; margin: 40px auto; background: #1e293b; border-radius: 20px; padding: 30px; border: 1px solid #00a651; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px;">
+                <h2 style="color: white; margin: 0; font-size: 20px; font-weight: bold;">অ্যাডমিন প্যানেল 👑</h2>
+                <button onclick="adminLogout()" style="background: #e11d33; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">লগআউট</button>
+            </div>
+            
+            <!-- Bulk WhatsApp Message Section -->
+            <label style="color: #cbd5e1; font-size: 14px; font-weight: bold; display: block; margin-bottom: 10px;">গোপন মেসেজ লিখুন (যা সবার কাছে যাবে):</label>
+            <textarea id="bulkMessage" rows="4" placeholder="এখানে আপনার মেসেজ লিখুন..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; resize: vertical; outline: none; margin-bottom: 15px;"></textarea>
+            
+            <button onclick="prepareWhatsAppLinks()" style="background: #00a651; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i class="fa-solid fa-paper-plane"></i> বার্তা পাঠানোর লিংক তৈরি করুন
+            </button>
+            
+            <div id="whatsappLinksContainer" style="margin-top: 15px; display: none; background: #0f172a; padding: 20px; border-radius: 15px; border: 1px solid #334155;">
+                <p style="color: #fbbf24; font-size: 13px; font-weight: bold; margin-bottom: 15px;"><i class="fa-solid fa-circle-info"></i> নিচের বাটনগুলোতে ক্লিক করে একে একে মেসেজ পাঠিয়ে দিন:</p>
+                <div id="linkList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            </div>
+
+            <!-- Feedback & Suggestions Viewer Section -->
+            <div style="margin-top: 30px; border-top: 1px solid #334155; padding-top: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #fbbf24; font-size: 16px; font-weight: bold; margin: 0;"><i class="fa-solid fa-envelope-open-text"></i> প্রাপ্ত পরামর্শ ও মতামত</h3>
+                    <button onclick="clearSuggestions()" style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold;">সব মুছুন</button>
+                </div>
+                <div id="adminSuggestionsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
+                    <!-- Suggestions will load here automatically -->
+                </div>
+            </div>
+
+            <!-- Admin Album Upload Section (NEW) -->
+            <div style="margin-top: 30px; border-top: 1px solid #334155; padding-top: 25px;">
+                <h3 style="color: #00a651; font-size: 16px; font-weight: bold; margin-bottom: 15px;"><i class="fa-solid fa-cloud-arrow-up"></i> নতুন অ্যালবাম তৈরি করুন</h3>
+                <div style="background: #0f172a; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+                    <input type="text" id="albumTitle" placeholder="অ্যালবামের শিরোনাম (যেমন: বৃক্ষরোপণ কর্মসূচি)" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
+                    <label style="color: #94a3b8; font-size: 12px; margin-bottom: 8px; display: block;">ছবির লিংক দিন (একাধিক ছবি হলে কমা (,) দিয়ে আলাদা করুন):</label>
+                    <textarea id="albumImages" rows="3" placeholder="https://i.postimg.cc/xxx.jpg, https://i.postimg.cc/yyy.jpg" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; resize: vertical; outline: none;"></textarea>
+                    <button onclick="createNewAlbum()" style="background: #00a651; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 15px;">অ্যালবাম আপলোড করুন</button>
+                </div>
+                <div id="adminAlbumsList" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; max-height: 300px; overflow-y: auto; padding-right: 5px;"></div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Interactive Scripts -->
     <script>
-        // Suggestion Form Handler (নতুন যুক্ত করা হয়েছে)
+        // Suggestion Form Handler
         function handleSuggestionSubmit(e) {
             e.preventDefault();
+            
+            const name = document.getElementById('sugName').value.trim();
+            const phone = document.getElementById('sugPhone').value.trim() || 'নাম্বার দেয়নি';
+            const message = document.getElementById('sugMessage').value.trim();
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('bn-BD') + ' - ' + now.toLocaleTimeString('bn-BD');
+
+            // Save to browser's memory
+            let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
+            suggestions.unshift({ name, phone, message, date: dateStr });
+            localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
+
+            // Show Success
             const successMsg = document.getElementById('suggestionSuccess');
             successMsg.classList.remove('hidden');
             document.getElementById('suggestionForm').reset();
-            setTimeout(() => successMsg.classList.add('hidden'), 5000);
+            
+            setTimeout(() => { successMsg.classList.add('hidden'); }, 4000);
         }
 
         // Mobile Menu Toggle
@@ -1761,7 +1861,7 @@
             },
             {
                 src: 'https://i.postimg.cc/KzS4mYDz/image.png',
-                caption: 'নেতৃবৃন্দের শুভেচ্ছা ও সৌহার্দ্য বিনিময় — ০২'
+                caption: 'নেতৃবৃন্দের শুভেচ্ছা ও সৌহার্দ্য বিনিময় — ০২'
             },
             {
                 src: 'https://i.postimg.cc/W3vpQHsW/image.png',
@@ -1877,7 +1977,7 @@
             { name: 'স্বেচ্ছাসেবী প্রতিনিধি ৫', group: 'O-', unit: 'রাজশাহী নিউ গভঃ ডিগ্রি কলেজ', phone: '01700-000000', status: 'জরুরি রেসপন্স' },
             { name: 'স্বেচ্ছাসেবী প্রতিনিধি ৬', group: 'B-', unit: 'শাহমখদুম থানা ছাত্রদল', phone: '01700-000000', status: 'জরুরি রেসপন্স' },
             { name: 'স্বেচ্ছাসেবী প্রতিনিধি ৭', group: 'A-', unit: 'রাজশাহী সরকারি সিটি কলেজ', phone: '01700-000000', status: 'জরুরি রেসপন্স' },
-            { name: 'স্বেচ্ছাসেবী প্রতিনিধি ৮', group: 'AB-', unit: 'মহানগর ব্লাড উইং (মালোপাড়া)', phone: '01700-000000', status: 'জরুরি রেসপন্স' }
+            { name: 'স্বেচ্ছাসেবী প্রতিনিধি ৮', group: 'AB-', unit: 'মহানগর ব্লাড উইং (মালোপাড়া)', phone: '01700-000000', status: 'জরুরি রেসপন্স' }
         ];
 
         let currentSelectedBloodGroup = 'ALL';
@@ -1912,7 +2012,7 @@
             if (filtered.length === 0) {
                 listEl.innerHTML = `
                     <div class="col-span-2 p-6 rounded-2xl bg-slate-50 text-center text-slate-600 text-sm">
-                        এই গ্রুপে নতুন স্বেচ্ছাসেবী যুক্ত করতে ডানপাশের ফরমটি পূরণ করুন অথবা সরাসরি ব্লাড রিকোয়েস্ট পাঠান।
+                        এই গ্রুপে নতুন স্বেচ্ছাসেবী যুক্ত করতে ডানপাশের ফরমটি পূরণ করুন অথবা সরাসরি ব্লাড রিকোয়েস্ট পাঠান।
                     </div>
                 `;
                 return;
@@ -1961,7 +2061,7 @@
                     statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-bdRed-600 animate-ping"></span><span><strong>${group}</strong> গ্রুপের জরুরি রক্তের জন্য ইউনিটভিত্তিক ডোনার প্রস্তুত</span>`;
                 }
             } else if (statusEl) {
-                statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-bdGreen-600 animate-ping"></span><span>মহানগরীর ৩০টি ওয়ার্ড ও কলেজ ইউনিটে স্বেচ্ছাসেবী প্রস্তুত</span>`;
+                statusEl.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-bdGreen-600 animate-ping"></span><span>মহানগরীর ৩০টি ওয়ার্ড ও কলেজ ইউনিটে স্বেচ্ছাসেবী প্রস্তুত</span>`;
             }
 
             updateBloodPreviewCard();
@@ -2030,10 +2130,10 @@
 
             return `🩸 জরুরি রক্তের আবেদন — রাজশাহী মহানগর ছাত্রদল ব্লাড সেল\n` +
                    `━━━━━━━━━━━━━━━━━━━━\n` +
-                   `🔹 প্রয়োজনীয় রক্তের গ্রুপ: ${group}\n` +
+                   `🔹 প্রয়োজনীয় রক্তের গ্রুপ: ${group}\n` +
                    `🔹 রক্তের পরিমাণ: ${bags}\n` +
                    `🔹 রোগীর সমস্যা: ${condition}\n` +
-                   `🔹 কখন প্রয়োজন: ${urgency}\n` +
+                   `🔹 কখন প্রয়োজন: ${urgency}\n` +
                    `🔹 হাসপাতাল: ${hospital}\n` +
                    `🔹 যোগাযোগ: ${contact} (${phone})\n` +
                    `━━━━━━━━━━━━━━━━━━━━\n` +
@@ -2123,183 +2223,240 @@
 
         // Initial render of volunteer donors
         renderDonorList('ALL');
-    </script>
-<!-- ================= ADMIN PANEL START ================= -->
-<!-- Secret Admin Trigger Button -->
-<div style="text-align: center; padding: 20px; background: #0f172a;">
-    <button onclick="document.getElementById('adminLoginModal').style.display='flex'" style="background: transparent; border: none; color: #475569; cursor: pointer; font-size: 14px; font-weight: bold;">
-        <i class="fa-solid fa-lock"></i> Admin
-    </button>
-</div>
 
-<!-- Admin Login Modal -->
-<div id="adminLoginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
-    <div style="background: #0f172a; padding: 30px; border-radius: 20px; border: 1px solid #00a651; width: 100%; max-width: 400px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <h3 style="color: #00a651; margin-bottom: 20px; font-size: 20px; font-weight: bold;">অ্যাডমিন লগইন</h3>
-        <input type="text" id="adminUser" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
-        <input type="password" id="adminPass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
-        <button onclick="adminLogin()" style="background: linear-gradient(45deg, #00a651, #007a3b); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px;">লগইন করুন</button>
-        <button onclick="document.getElementById('adminLoginModal').style.display='none'" style="background: transparent; color: #94a3b8; border: none; margin-top: 15px; cursor: pointer; font-weight: bold;">বাতিল</button>
-    </div>
-</div>
+        // Admin WhatsApp Numbers
+        const adminWaNumbers = [
+            "+8801738991884",
+            "+8801800000000",
+            "+8801900000000"
+        ];
 
-<!-- Admin Dashboard -->
-<div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 10000; overflow-y: auto; padding: 20px;">
-    <div style="max-width: 600px; margin: 40px auto; background: #1e293b; border-radius: 20px; padding: 30px; border: 1px solid #00a651; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px;">
-            <h2 style="color: white; margin: 0; font-size: 20px; font-weight: bold;">অ্যাডমিন প্যানেল 👑</h2>
-            <button onclick="adminLogout()" style="background: #e11d33; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">লগআউট</button>
-        </div>
-        
-        <!-- Bulk WhatsApp Message Section -->
-        <label style="color: #cbd5e1; font-size: 14px; font-weight: bold; display: block; margin-bottom: 10px;">গোপন মেসেজ লিখুন (যা সবার কাছে যাবে):</label>
-        <textarea id="bulkMessage" rows="4" placeholder="এখানে আপনার মেসেজ লিখুন..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; resize: vertical; outline: none; margin-bottom: 15px;"></textarea>
-        
-        <button onclick="prepareWhatsAppLinks()" style="background: #00a651; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <i class="fa-solid fa-paper-plane"></i> বার্তা পাঠানোর লিংক তৈরি করুন
-        </button>
-        
-        <div id="whatsappLinksContainer" style="margin-top: 15px; display: none; background: #0f172a; padding: 20px; border-radius: 15px; border: 1px solid #334155;">
-            <p style="color: #fbbf24; font-size: 13px; font-weight: bold; margin-bottom: 15px;"><i class="fa-solid fa-circle-info"></i> নিচের বাটনগুলোতে ক্লিক করে একে একে মেসেজ পাঠিয়ে দিন:</p>
-            <div id="linkList" style="display: flex; flex-direction: column; gap: 10px;"></div>
-        </div>
+        // --- Admin Login & Control Scripts ---
+        function adminLogin() {
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
 
-        <!-- Feedback & Suggestions Viewer Section -->
-        <div style="margin-top: 30px; border-top: 1px solid #334155; padding-top: 25px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h3 style="color: #fbbf24; font-size: 16px; font-weight: bold; margin: 0;"><i class="fa-solid fa-envelope-open-text"></i> প্রাপ্ত পরামর্শ ও মতামত</h3>
-                <button onclick="clearSuggestions()" style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold;">সব মুছুন</button>
-            </div>
-            <div id="adminSuggestionsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
-                <!-- Suggestions will load here automatically -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Admin & Suggestions Scripts -->
-<script>
-    // এখানে আপনার আসল হোয়াটসঅ্যাপ নাম্বারগুলো যুক্ত করবেন (+880 সহ)
-    const adminWaNumbers = [
-        "+8801738991884",
-        "+8801800000000",
-        "+8801900000000"
-    ];
-
-    // --- Suggestion Box Overwrite Script (Saves data quietly) ---
-    function handleSuggestionSubmit(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('sugName').value.trim();
-        const phone = document.getElementById('sugPhone').value.trim() || 'নাম্বার দেয়নি';
-        const message = document.getElementById('sugMessage').value.trim();
-        
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('bn-BD') + ' - ' + now.toLocaleTimeString('bn-BD');
-
-        // Save to browser's memory
-        let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
-        suggestions.unshift({ name, phone, message, date: dateStr });
-        localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
-
-        // Show Success
-        const successMsg = document.getElementById('suggestionSuccess');
-        successMsg.classList.remove('hidden');
-        document.getElementById('suggestionForm').reset();
-        
-        setTimeout(() => { successMsg.classList.add('hidden'); }, 4000);
-    }
-
-    // --- Admin Login & Control Scripts ---
-    function adminLogin() {
-        const u = document.getElementById('adminUser').value;
-        const p = document.getElementById('adminPass').value;
-
-        if (u === 'lemon' && p === 'lemon1020') {
-            document.getElementById('adminLoginModal').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'block';
-            document.getElementById('adminUser').value = '';
-            document.getElementById('adminPass').value = '';
-            loadSuggestions(); // Load messages when admin logs in
-        } else {
-            alert('❌ ভুল ইউজারনেম বা পাসওয়ার্ড!');
-        }
-    }
-
-    function adminLogout() {
-        document.getElementById('adminDashboard').style.display = 'none';
-        document.getElementById('whatsappLinksContainer').style.display = 'none';
-        document.getElementById('bulkMessage').value = '';
-    }
-
-    // --- Load Suggestions inside Admin Panel ---
-    function loadSuggestions() {
-        const list = document.getElementById('adminSuggestionsList');
-        const suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
-        
-        if(suggestions.length === 0) {
-            list.innerHTML = '<p style="color: #64748b; font-size: 13px; text-align: center; padding: 20px;">এখনো কোনো পরামর্শ বা মেসেজ আসেনি।</p>';
-            return;
+            if (u === 'lemon' && p === 'lemon1020') {
+                document.getElementById('adminLoginModal').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                document.getElementById('adminUser').value = '';
+                document.getElementById('adminPass').value = '';
+                loadSuggestions(); 
+                loadAdminAlbums(); 
+            } else {
+                alert('❌ ভুল ইউজারনেম বা পাসওয়ার্ড!');
+            }
         }
 
-        list.innerHTML = suggestions.map((s, index) => `
-            <div style="background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <strong style="color: #00a651; font-size: 14px;">${s.name}</strong>
-                    <span style="color: #64748b; font-size: 11px;">${s.date}</span>
-                </div>
-                <div style="color: #fbbf24; font-size: 12px; margin-bottom: 8px;"><i class="fa-solid fa-phone" style="font-size: 10px;"></i> ${s.phone}</div>
-                <p style="color: #e2e8f0; font-size: 13px; line-height: 1.6; margin: 0 0 10px 0;">${s.message}</p>
-                <button onclick="deleteSuggestion(${index})" style="background: transparent; color: #ef4444; border: none; cursor: pointer; font-size: 12px; font-weight: bold; padding: 0;"><i class="fa-solid fa-trash"></i> ডিলিট করুন</button>
-            </div>
-        `).join('');
-    }
-
-    function deleteSuggestion(index) {
-        if(confirm('এই মেসেজটি ডিলিট করতে চান?')) {
-            let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
-            suggestions.splice(index, 1);
-            localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
-            loadSuggestions();
+        function adminLogout() {
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('whatsappLinksContainer').style.display = 'none';
+            document.getElementById('bulkMessage').value = '';
         }
-    }
 
-    function clearSuggestions() {
-        if(confirm('সব মেসেজ মুছে ফেলতে চান? এটি আর ফেরত পাওয়া যাবে না!')) {
-            localStorage.removeItem('rm_chatradal_suggestions');
-            loadSuggestions();
-        }
-    }
-
-    // --- Bulk WhatsApp Scripts ---
-    function prepareWhatsAppLinks() {
-        const msg = document.getElementById('bulkMessage').value.trim();
-        if (!msg) {
-            alert("দয়া করে মেসেজ বক্সে কিছু লিখুন!");
-            return;
-        }
-        const linkList = document.getElementById('linkList');
-        linkList.innerHTML = ''; 
-        const encodedMessage = encodeURIComponent(msg);
-
-        adminWaNumbers.forEach((number, index) => {
-            const btn = document.createElement('a');
-            btn.href = `https://wa.me/${number}?text=${encodedMessage}`;
-            btn.target = "_blank";
-            btn.style = "background: #00a651; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; justify-content: space-between; align-items: center;";
-            btn.innerHTML = `<span>📲 সদস্য ${index + 1} কে পাঠান (${number})</span> <i class="fa-solid fa-arrow-right"></i>`;
+        // --- Load Suggestions inside Admin Panel ---
+        function loadSuggestions() {
+            const list = document.getElementById('adminSuggestionsList');
+            const suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
             
-            btn.onclick = function() {
-                this.style.background = '#334155';
-                this.style.color = '#94a3b8';
-                this.style.pointerEvents = 'none';
-                this.innerHTML = `<span>✅ পাঠানো হয়েছে (${number})</span>`;
-            };
-            linkList.appendChild(btn);
-        });
-        document.getElementById('whatsappLinksContainer').style.display = 'block';
-    }
-</script>
+            if(suggestions.length === 0) {
+                list.innerHTML = '<p style="color: #64748b; font-size: 13px; text-align: center; padding: 20px;">এখনো কোনো পরামর্শ বা মেসেজ আসেনি।</p>';
+                return;
+            }
+
+            list.innerHTML = suggestions.map((s, index) => `
+                <div style="background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <strong style="color: #00a651; font-size: 14px;">${s.name}</strong>
+                        <span style="color: #64748b; font-size: 11px;">${s.date}</span>
+                    </div>
+                    <div style="color: #fbbf24; font-size: 12px; margin-bottom: 8px;"><i class="fa-solid fa-phone" style="font-size: 10px;"></i> ${s.phone}</div>
+                    <p style="color: #e2e8f0; font-size: 13px; line-height: 1.6; margin: 0 0 10px 0;">${s.message}</p>
+                    <button onclick="deleteSuggestion(${index})" style="background: transparent; color: #ef4444; border: none; cursor: pointer; font-size: 12px; font-weight: bold; padding: 0;"><i class="fa-solid fa-trash"></i> ডিলিট করুন</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteSuggestion(index) {
+            if(confirm('এই মেসেজটি ডিলিট করতে চান?')) {
+                let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
+                suggestions.splice(index, 1);
+                localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
+                loadSuggestions();
+            }
+        }
+
+        function clearSuggestions() {
+            if(confirm('সব মেসেজ মুছে ফেলতে চান? এটি আর ফেরত পাওয়া যাবে না!')) {
+                localStorage.removeItem('rm_chatradal_suggestions');
+                loadSuggestions();
+            }
+        }
+
+        // --- Bulk WhatsApp Scripts ---
+        function prepareWhatsAppLinks() {
+            const msg = document.getElementById('bulkMessage').value.trim();
+            if (!msg) {
+                alert("দয়া করে মেসেজ বক্সে কিছু লিখুন!");
+                return;
+            }
+            const linkList = document.getElementById('linkList');
+            linkList.innerHTML = ''; 
+            const encodedMessage = encodeURIComponent(msg);
+
+            adminWaNumbers.forEach((number, index) => {
+                const btn = document.createElement('a');
+                btn.href = `https://wa.me/${number}?text=${encodedMessage}`;
+                btn.target = "_blank";
+                btn.style = "background: #00a651; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; justify-content: space-between; align-items: center;";
+                btn.innerHTML = `<span>📲 সদস্য ${index + 1} কে পাঠান (${number})</span> <i class="fa-solid fa-arrow-right"></i>`;
+                
+                btn.onclick = function() {
+                    this.style.background = '#334155';
+                    this.style.color = '#94a3b8';
+                    this.style.pointerEvents = 'none';
+                    this.innerHTML = `<span>✅ পাঠানো হয়েছে (${number})</span>`;
+                };
+                linkList.appendChild(btn);
+            });
+            document.getElementById('whatsappLinksContainer').style.display = 'block';
+        }
+
+        // --- Dynamic Album Script ---
+        function createNewAlbum() {
+            const title = document.getElementById('albumTitle').value.trim();
+            const imagesStr = document.getElementById('albumImages').value.trim();
+            
+            if(!title || !imagesStr) {
+                alert('অনুগ্রহ করে শিরোনাম এবং অন্তত একটি ছবির লিংক দিন!');
+                return;
+            }
+            
+            const images = imagesStr.split(',').map(url => url.trim()).filter(url => url);
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('bn-BD'); 
+
+            const album = { id: Date.now(), title: title, date: dateStr, images: images };
+            let albums = JSON.parse(localStorage.getItem('rm_chatradal_albums') || '[]');
+            albums.unshift(album); 
+            localStorage.setItem('rm_chatradal_albums', JSON.stringify(albums));
+
+            document.getElementById('albumTitle').value = '';
+            document.getElementById('albumImages').value = '';
+            
+            loadAdminAlbums();
+            loadFrontendAlbums();
+            alert('অ্যালবাম সফলভাবে আপলোড হয়েছে!');
+        }
+
+        function loadAdminAlbums() {
+            const list = document.getElementById('adminAlbumsList');
+            if(!list) return;
+            const albums = JSON.parse(localStorage.getItem('rm_chatradal_albums') || '[]');
+            
+            if(albums.length === 0) {
+                list.innerHTML = '<p style="color: #64748b; font-size: 13px; text-align: center;">এখনো কোনো অ্যালবাম আপলোড করা হয়নি।</p>';
+                return;
+            }
+
+            list.innerHTML = albums.map((album, index) => `
+                <div style="background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="color: white; font-size: 14px;">${album.title}</strong>
+                        <div style="color: #fbbf24; font-size: 12px; margin-top: 4px;">📅 ${album.date} | 🖼️ ${album.images.length} টি ছবি</div>
+                    </div>
+                    <button onclick="deleteAlbum(${index})" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold;">ডিলিট</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteAlbum(index) {
+            if(confirm('এই অ্যালবামটি মুছে ফেলতে চান?')) {
+                let albums = JSON.parse(localStorage.getItem('rm_chatradal_albums') || '[]');
+                albums.splice(index, 1);
+                localStorage.setItem('rm_chatradal_albums', JSON.stringify(albums));
+                loadAdminAlbums();
+                loadFrontendAlbums();
+            }
+        }
+
+        function loadFrontendAlbums() {
+            const container = document.getElementById('dynamicGalleryContainer');
+            if(!container) return;
+            const albums = JSON.parse(localStorage.getItem('rm_chatradal_albums') || '[]');
+
+            if(albums.length === 0) {
+                container.innerHTML = '<div class="col-span-full text-center text-slate-500 py-6">এখনো কোনো অ্যালবাম আপলোড করা হয়নি।</div>';
+                return;
+            }
+
+            container.innerHTML = albums.map((album) => {
+                const imgsJson = encodeURIComponent(JSON.stringify(album.images));
+                return `
+                <div class="ios-card group cursor-pointer overflow-hidden border border-bdGreen-600/20 shadow-lg" onclick="openDynamicAlbum('${imgsJson}')">
+                    <div class="relative h-60 w-full bg-slate-100 overflow-hidden">
+                        <img src="${album.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/0f172a/ffffff?text=Image+Error'">
+                        
+                        <div class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 shadow-lg">
+                            <i class="fa-solid fa-images mr-1"></i> ${album.images.length}
+                        </div>
+                        
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 pt-12">
+                            <h3 class="text-white font-bold text-lg drop-shadow-md truncate">${album.title}</h3>
+                            <div class="text-amber-300 text-xs font-bold mt-1">📅 আপলোড: ${album.date}</div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        let currentDynamicImages = [];
+        let currentDynamicIndex = 0;
+
+        function openDynamicAlbum(encodedImgs) {
+            try {
+                currentDynamicImages = JSON.parse(decodeURIComponent(encodedImgs));
+                if(currentDynamicImages.length > 0) {
+                    currentDynamicIndex = 0;
+                    showDynamicImage();
+                }
+            } catch(e) {}
+        }
+
+        function showDynamicImage() {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImage');
+            const prevBtn = document.getElementById('prevSlideBtn');
+            const nextBtn = document.getElementById('nextSlideBtn');
+            const counter = document.getElementById('lightboxCounter');
+
+            img.src = currentDynamicImages[currentDynamicIndex];
+            counter.textContent = (currentDynamicIndex + 1) + ' / ' + currentDynamicImages.length;
+            counter.classList.remove('hidden');
+
+            if(currentDynamicImages.length > 1) {
+                prevBtn.classList.remove('hidden'); prevBtn.classList.add('flex');
+                nextBtn.classList.remove('hidden'); nextBtn.classList.add('flex');
+                
+                prevBtn.onclick = function() {
+                    currentDynamicIndex = (currentDynamicIndex - 1 + currentDynamicImages.length) % currentDynamicImages.length;
+                    showDynamicImage();
+                };
+                nextBtn.onclick = function() {
+                    currentDynamicIndex = (currentDynamicIndex + 1) % currentDynamicImages.length;
+                    showDynamicImage();
+                };
+            } else {
+                prevBtn.classList.add('hidden'); nextBtn.classList.add('hidden');
+            }
+
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadFrontendAlbums);
+    </script>
 <!-- ================= ADMIN PANEL END ================= -->    
 </body>
 </html>
