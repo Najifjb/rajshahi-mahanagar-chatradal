@@ -2151,21 +2151,33 @@
             <button onclick="adminLogout()" style="background: #e11d33; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">লগআউট</button>
         </div>
         
+        <!-- Bulk WhatsApp Message Section -->
         <label style="color: #cbd5e1; font-size: 14px; font-weight: bold; display: block; margin-bottom: 10px;">গোপন মেসেজ লিখুন (যা সবার কাছে যাবে):</label>
-        <textarea id="bulkMessage" rows="5" placeholder="এখানে আপনার মেসেজ লিখুন..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; resize: vertical; outline: none; margin-bottom: 15px;"></textarea>
+        <textarea id="bulkMessage" rows="4" placeholder="এখানে আপনার মেসেজ লিখুন..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; resize: vertical; outline: none; margin-bottom: 15px;"></textarea>
         
-        <button onclick="prepareWhatsAppLinks()" style="background: #00a651; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <button onclick="prepareWhatsAppLinks()" style="background: #00a651; color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
             <i class="fa-solid fa-paper-plane"></i> বার্তা পাঠানোর লিংক তৈরি করুন
         </button>
         
-        <div id="whatsappLinksContainer" style="margin-top: 25px; display: none; background: #0f172a; padding: 20px; border-radius: 15px; border: 1px solid #334155;">
+        <div id="whatsappLinksContainer" style="margin-top: 15px; display: none; background: #0f172a; padding: 20px; border-radius: 15px; border: 1px solid #334155;">
             <p style="color: #fbbf24; font-size: 13px; font-weight: bold; margin-bottom: 15px;"><i class="fa-solid fa-circle-info"></i> নিচের বাটনগুলোতে ক্লিক করে একে একে মেসেজ পাঠিয়ে দিন:</p>
             <div id="linkList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Feedback & Suggestions Viewer Section -->
+        <div style="margin-top: 30px; border-top: 1px solid #334155; padding-top: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="color: #fbbf24; font-size: 16px; font-weight: bold; margin: 0;"><i class="fa-solid fa-envelope-open-text"></i> প্রাপ্ত পরামর্শ ও মতামত</h3>
+                <button onclick="clearSuggestions()" style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: bold;">সব মুছুন</button>
+            </div>
+            <div id="adminSuggestionsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 5px;">
+                <!-- Suggestions will load here automatically -->
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Admin Scripts -->
+<!-- Admin & Suggestions Scripts -->
 <script>
     // এখানে আপনার আসল হোয়াটসঅ্যাপ নাম্বারগুলো যুক্ত করবেন (+880 সহ)
     const adminWaNumbers = [
@@ -2174,6 +2186,31 @@
         "+8801900000000"
     ];
 
+    // --- Suggestion Box Overwrite Script (Saves data quietly) ---
+    function handleSuggestionSubmit(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('sugName').value.trim();
+        const phone = document.getElementById('sugPhone').value.trim() || 'নাম্বার দেয়নি';
+        const message = document.getElementById('sugMessage').value.trim();
+        
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('bn-BD') + ' - ' + now.toLocaleTimeString('bn-BD');
+
+        // Save to browser's memory
+        let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
+        suggestions.unshift({ name, phone, message, date: dateStr });
+        localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
+
+        // Show Success
+        const successMsg = document.getElementById('suggestionSuccess');
+        successMsg.classList.remove('hidden');
+        document.getElementById('suggestionForm').reset();
+        
+        setTimeout(() => { successMsg.classList.add('hidden'); }, 4000);
+    }
+
+    // --- Admin Login & Control Scripts ---
     function adminLogin() {
         const u = document.getElementById('adminUser').value;
         const p = document.getElementById('adminPass').value;
@@ -2183,6 +2220,7 @@
             document.getElementById('adminDashboard').style.display = 'block';
             document.getElementById('adminUser').value = '';
             document.getElementById('adminPass').value = '';
+            loadSuggestions(); // Load messages when admin logs in
         } else {
             alert('❌ ভুল ইউজারনেম বা পাসওয়ার্ড!');
         }
@@ -2194,13 +2232,52 @@
         document.getElementById('bulkMessage').value = '';
     }
 
+    // --- Load Suggestions inside Admin Panel ---
+    function loadSuggestions() {
+        const list = document.getElementById('adminSuggestionsList');
+        const suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
+        
+        if(suggestions.length === 0) {
+            list.innerHTML = '<p style="color: #64748b; font-size: 13px; text-align: center; padding: 20px;">এখনো কোনো পরামর্শ বা মেসেজ আসেনি।</p>';
+            return;
+        }
+
+        list.innerHTML = suggestions.map((s, index) => `
+            <div style="background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <strong style="color: #00a651; font-size: 14px;">${s.name}</strong>
+                    <span style="color: #64748b; font-size: 11px;">${s.date}</span>
+                </div>
+                <div style="color: #fbbf24; font-size: 12px; margin-bottom: 8px;"><i class="fa-solid fa-phone" style="font-size: 10px;"></i> ${s.phone}</div>
+                <p style="color: #e2e8f0; font-size: 13px; line-height: 1.6; margin: 0 0 10px 0;">${s.message}</p>
+                <button onclick="deleteSuggestion(${index})" style="background: transparent; color: #ef4444; border: none; cursor: pointer; font-size: 12px; font-weight: bold; padding: 0;"><i class="fa-solid fa-trash"></i> ডিলিট করুন</button>
+            </div>
+        `).join('');
+    }
+
+    function deleteSuggestion(index) {
+        if(confirm('এই মেসেজটি ডিলিট করতে চান?')) {
+            let suggestions = JSON.parse(localStorage.getItem('rm_chatradal_suggestions') || '[]');
+            suggestions.splice(index, 1);
+            localStorage.setItem('rm_chatradal_suggestions', JSON.stringify(suggestions));
+            loadSuggestions();
+        }
+    }
+
+    function clearSuggestions() {
+        if(confirm('সব মেসেজ মুছে ফেলতে চান? এটি আর ফেরত পাওয়া যাবে না!')) {
+            localStorage.removeItem('rm_chatradal_suggestions');
+            loadSuggestions();
+        }
+    }
+
+    // --- Bulk WhatsApp Scripts ---
     function prepareWhatsAppLinks() {
         const msg = document.getElementById('bulkMessage').value.trim();
         if (!msg) {
             alert("দয়া করে মেসেজ বক্সে কিছু লিখুন!");
             return;
         }
-
         const linkList = document.getElementById('linkList');
         linkList.innerHTML = ''; 
         const encodedMessage = encodeURIComponent(msg);
@@ -2212,20 +2289,17 @@
             btn.style = "background: #00a651; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; justify-content: space-between; align-items: center;";
             btn.innerHTML = `<span>📲 সদস্য ${index + 1} কে পাঠান (${number})</span> <i class="fa-solid fa-arrow-right"></i>`;
             
-            // Mark as sent on click
             btn.onclick = function() {
                 this.style.background = '#334155';
                 this.style.color = '#94a3b8';
                 this.style.pointerEvents = 'none';
                 this.innerHTML = `<span>✅ পাঠানো হয়েছে (${number})</span>`;
             };
-
             linkList.appendChild(btn);
         });
-
         document.getElementById('whatsappLinksContainer').style.display = 'block';
     }
 </script>
-<!-- ================= ADMIN PANEL END ================= -->
+<!-- ================= ADMIN PANEL END ================= -->    
 </body>
 </html>
