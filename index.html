@@ -1510,5 +1510,58 @@
         </div>
     </div>
 </div>
+<script>
+    // এখানে আপনি যাদের কাছে মেসেজ পাঠাতে চান তাদের হোয়াটসঅ্যাপ নাম্বারগুলো যুক্ত করবেন (অবশ্যই +880 সহ)
+    const whatsappNumbers = [
+        "+8801700000000",
+        "+8801800000000",
+        "+8801900000000" // কমা (,) দিয়ে আরও নাম্বার বাড়াতে পারবেন
+    ];
+
+    function adminLogin() {
+        const user = document.getElementById('adminUser').value;
+        const pass = document.getElementById('adminPass').value;
+
+        if (user === 'lemon' && pass === 'lemon1020') {
+            document.getElementById('adminLoginModal').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            // Security fields clear
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
+        } else {
+            alert('❌ ভুল ইউজারনেম বা পাসওয়ার্ড!');
+        }
+    }
+
+    function adminLogout() {
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('whatsappLinksContainer').style.display = 'none';
+        document.getElementById('bulkMessage').value = '';
+    }
+
+    function prepareWhatsAppLinks() {
+        const message = document.getElementById('bulkMessage').value.trim();
+        if (!message) {
+            alert("দয়া করে মেসেজ বক্সে কিছু লিখুন!");
+            return;
+        }
+
+        const linkList = document.getElementById('linkList');
+        linkList.innerHTML = ''; // Clear old links
+        
+        const encodedMessage = encodeURIComponent(message);
+
+        whatsappNumbers.forEach((number, index) => {
+            const btn = document.createElement('a');
+            btn.href = `https://wa.me/${number}?text=${encodedMessage}`;
+            btn.target = "_blank";
+            btn.innerHTML = `📲 সদস্য ${index + 1} কে পাঠান (${number})`;
+            btn.style = "background: #25D366; color: white; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: bold;";
+            linkList.appendChild(btn);
+        });
+
+        document.getElementById('whatsappLinksContainer').style.display = 'block';
+    }
+</script>
 </body>
 </html>
