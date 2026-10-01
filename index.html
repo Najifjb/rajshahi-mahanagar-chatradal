@@ -1458,22 +1458,7 @@
         // Initial render of volunteer donors
         renderDonorList('ALL');
 
-        // Copy Developer Email Function
-        function copyDeveloperEmail() {
-            copyTextFallback('najifbj69@gmail.com');
-            const toast = document.getElementById('devEmailToast');
-            const btnText = document.getElementById('devEmailCopyBtnText');
-            if (toast) {
-                toast.classList.remove('hidden');
-                setTimeout(() => toast.classList.add('hidden'), 4000);
-            }
-            if (btnText) {
-                btnText.textContent = '✅ কপি হয়েছে!';
-                setTimeout(() => {
-                    btnText.textContent = '📋 ইমেইল কপি করুন';
-                }, 3000);
-            }
-        }
+
     </script>
 <!-- Secret Admin Trigger Button -->
 <div style="text-align: center; padding: 20px; background: #000;">
