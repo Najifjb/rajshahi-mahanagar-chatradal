@@ -2124,5 +2124,108 @@
         // Initial render of volunteer donors
         renderDonorList('ALL');
     </script>
+<!-- ================= ADMIN PANEL START ================= -->
+<!-- Secret Admin Trigger Button -->
+<div style="text-align: center; padding: 20px; background: #0f172a;">
+    <button onclick="document.getElementById('adminLoginModal').style.display='flex'" style="background: transparent; border: none; color: #475569; cursor: pointer; font-size: 14px; font-weight: bold;">
+        <i class="fa-solid fa-lock"></i> Admin
+    </button>
+</div>
+
+<!-- Admin Login Modal -->
+<div id="adminLoginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+    <div style="background: #0f172a; padding: 30px; border-radius: 20px; border: 1px solid #00a651; width: 100%; max-width: 400px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h3 style="color: #00a651; margin-bottom: 20px; font-size: 20px; font-weight: bold;">অ্যাডমিন লগইন</h3>
+        <input type="text" id="adminUser" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
+        <input type="password" id="adminPass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; outline: none;">
+        <button onclick="adminLogin()" style="background: linear-gradient(45deg, #00a651, #007a3b); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px;">লগইন করুন</button>
+        <button onclick="document.getElementById('adminLoginModal').style.display='none'" style="background: transparent; color: #94a3b8; border: none; margin-top: 15px; cursor: pointer; font-weight: bold;">বাতিল</button>
+    </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div id="adminDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 10000; overflow-y: auto; padding: 20px;">
+    <div style="max-width: 600px; margin: 40px auto; background: #1e293b; border-radius: 20px; padding: 30px; border: 1px solid #00a651; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 15px; margin-bottom: 20px;">
+            <h2 style="color: white; margin: 0; font-size: 20px; font-weight: bold;">অ্যাডমিন প্যানেল 👑</h2>
+            <button onclick="adminLogout()" style="background: #e11d33; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">লগআউট</button>
+        </div>
+        
+        <label style="color: #cbd5e1; font-size: 14px; font-weight: bold; display: block; margin-bottom: 10px;">গোপন মেসেজ লিখুন (যা সবার কাছে যাবে):</label>
+        <textarea id="bulkMessage" rows="5" placeholder="এখানে আপনার মেসেজ লিখুন..." style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #334155; background: #0f172a; color: white; resize: vertical; outline: none; margin-bottom: 15px;"></textarea>
+        
+        <button onclick="prepareWhatsAppLinks()" style="background: #00a651; color: white; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <i class="fa-solid fa-paper-plane"></i> বার্তা পাঠানোর লিংক তৈরি করুন
+        </button>
+        
+        <div id="whatsappLinksContainer" style="margin-top: 25px; display: none; background: #0f172a; padding: 20px; border-radius: 15px; border: 1px solid #334155;">
+            <p style="color: #fbbf24; font-size: 13px; font-weight: bold; margin-bottom: 15px;"><i class="fa-solid fa-circle-info"></i> নিচের বাটনগুলোতে ক্লিক করে একে একে মেসেজ পাঠিয়ে দিন:</p>
+            <div id="linkList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Scripts -->
+<script>
+    // এখানে আপনার আসল হোয়াটসঅ্যাপ নাম্বারগুলো যুক্ত করবেন (+880 সহ)
+    const adminWaNumbers = [
+        "+8801700000000",
+        "+8801800000000",
+        "+8801900000000"
+    ];
+
+    function adminLogin() {
+        const u = document.getElementById('adminUser').value;
+        const p = document.getElementById('adminPass').value;
+
+        if (u === 'lemon' && p === 'lemon1020') {
+            document.getElementById('adminLoginModal').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
+        } else {
+            alert('❌ ভুল ইউজারনেম বা পাসওয়ার্ড!');
+        }
+    }
+
+    function adminLogout() {
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('whatsappLinksContainer').style.display = 'none';
+        document.getElementById('bulkMessage').value = '';
+    }
+
+    function prepareWhatsAppLinks() {
+        const msg = document.getElementById('bulkMessage').value.trim();
+        if (!msg) {
+            alert("দয়া করে মেসেজ বক্সে কিছু লিখুন!");
+            return;
+        }
+
+        const linkList = document.getElementById('linkList');
+        linkList.innerHTML = ''; 
+        const encodedMessage = encodeURIComponent(msg);
+
+        adminWaNumbers.forEach((number, index) => {
+            const btn = document.createElement('a');
+            btn.href = `https://wa.me/${number}?text=${encodedMessage}`;
+            btn.target = "_blank";
+            btn.style = "background: #00a651; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; justify-content: space-between; align-items: center;";
+            btn.innerHTML = `<span>📲 সদস্য ${index + 1} কে পাঠান (${number})</span> <i class="fa-solid fa-arrow-right"></i>`;
+            
+            // Mark as sent on click
+            btn.onclick = function() {
+                this.style.background = '#334155';
+                this.style.color = '#94a3b8';
+                this.style.pointerEvents = 'none';
+                this.innerHTML = `<span>✅ পাঠানো হয়েছে (${number})</span>`;
+            };
+
+            linkList.appendChild(btn);
+        });
+
+        document.getElementById('whatsappLinksContainer').style.display = 'block';
+    }
+</script>
+<!-- ================= ADMIN PANEL END ================= -->
 </body>
 </html>
