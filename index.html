@@ -52,6 +52,15 @@
                     fontFamily: {
                         bengali: ['"Noto Sans Bengali"', '"Hind Siliguri"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
                         heading: ['"Hind Siliguri"', '"Noto Sans Bengali"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+                    },
+                    animation: {
+                        'scroll-vertical': 'scrollVertical 20s linear infinite',
+                    },
+                    keyframes: {
+                        scrollVertical: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-50%)' }
+                        }
                     }
                 }
             }
@@ -197,6 +206,16 @@
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #006a4e, #f42a41);
             border-radius: 99px;
+        }
+
+        /* Vertical Scrolling Testimonial Container */
+        .testimonial-container {
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .testimonial-scroll-content:hover {
+            animation-play-state: paused;
         }
     </style>
 </head>
@@ -445,7 +464,7 @@
                     <span>রাজপথের পরীক্ষিত ও গতিশীল নেতৃত্ব</span>
                 </div>
                 <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-                    রাজশাহী মহানগর ছাত্রদলের বর্তমান নেতৃত্ব
+                    রাজশাহী মহানগর ছাত্রদল সম্পর্কে বিস্তারিত
                 </h2>
                 <p class="mt-3 text-slate-600 text-base sm:text-lg">
                     শিক্ষা, ঐক্য ও প্রগতির পতাকাবাহী রাজশাহী মহানগর জাতীয়তাবাদী ছাত্রদলের বর্তমান আহ্বায়ক, সদস্য সচিব এবং যুগ্ম আহ্বায়কবৃন্দ।
@@ -535,36 +554,24 @@
                     
                     <!-- Khalid Bin Walid Abir -->
                     <div class="ios-card p-5 text-center border-t-2 border-t-amber-500 group">
-                        <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-4 border-amber-200 shadow-md mb-4 overflow-hidden">
-                            <img src="https://i.postimg.cc/8PfZXpzK/89a50749-7b6a-4994-92f9-c9607ee611de.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="খালিদ বিন ওয়ালিদ আবির">
-                        </div>
                         <span class="inline-block px-2.5 py-1 rounded-md bg-amber-100 text-amber-800 text-[11px] font-bold mb-2">সিনিঃ যুগ্ম আহ্বায়ক</span>
                         <h4 class="text-base font-bold text-slate-900 leading-tight">খালিদ বিন ওয়ালিদ আবির</h4>
                     </div>
 
                     <!-- Abul Kalam Azad Tapon -->
                     <div class="ios-card p-5 text-center border-t-2 border-t-bdGreen-500 group">
-                        <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-4 border-bdGreen-200 shadow-md mb-4 overflow-hidden">
-                            <img src="https://i.postimg.cc/t4twDqBf/773544651-1377175227700253-6751185349687329895-n.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="আবুল কালাম আজাদ তপন">
-                        </div>
                         <span class="inline-block px-2.5 py-1 rounded-md bg-bdGreen-50 text-bdGreen-700 text-[11px] font-bold mb-2">যুগ্ম আহ্বায়ক</span>
                         <h4 class="text-base font-bold text-slate-900 leading-tight">আবুল কালাম আজাদ তপন</h4>
                     </div>
 
                     <!-- Shafayat Hossain Mannat -->
                     <div class="ios-card p-5 text-center border-t-2 border-t-bdGreen-500 group">
-                        <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-4 border-bdGreen-200 shadow-md mb-4 overflow-hidden">
-                            <img src="https://i.postimg.cc/s2MPxKG1/758356834-1058703349876581-2146199259833885744-n.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="সাফায়াত হোসেন মান্নাত">
-                        </div>
                         <span class="inline-block px-2.5 py-1 rounded-md bg-bdGreen-50 text-bdGreen-700 text-[11px] font-bold mb-2">যুগ্ম আহ্বায়ক</span>
                         <h4 class="text-base font-bold text-slate-900 leading-tight">সাফায়াত হোসেন মান্নাত</h4>
                     </div>
 
                     <!-- Sabbir Ahmed Antor -->
                     <div class="ios-card p-5 text-center border-t-2 border-t-bdGreen-500 group">
-                        <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-4 border-bdGreen-200 shadow-md mb-4 overflow-hidden">
-                            <img src="https://i.postimg.cc/26F1SBGv/550273315-2741290366202089-3885345964284548833-n.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform" alt="সাব্বির আহমেদ অন্তর">
-                        </div>
                         <span class="inline-block px-2.5 py-1 rounded-md bg-bdGreen-50 text-bdGreen-700 text-[11px] font-bold mb-2">যুগ্ম আহ্বায়ক</span>
                         <h4 class="text-base font-bold text-slate-900 leading-tight">সাব্বির আহমেদ অন্তর</h4>
                     </div>
@@ -598,7 +605,7 @@
                                 <i class="fa-solid fa-circle-check text-bdGreen-600"></i>
                                 <span>বিজ্ঞপ্তিটি স্পষ্টভাবে পড়ার নিয়ম:</span>
                             </div>
-                            <p class="text-slate-600">পাশের কমিটির তালিকার ছবির ওপর ক্লিক করলে এটি পূর্ণ পর্দায় (Full-Screen Zoom) বড় হয়ে ওপেন হবে。</p>
+                            <p class="text-slate-600">পাশের কমিটির তালিকার ছবির ওপর ক্লিক করলে এটি পূর্ণ পর্দায় (Full-Screen Zoom) বড় হয়ে ওপেন হবে।</p>
                         </div>
                         <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-3">
                             <button type="button" 
@@ -1137,7 +1144,7 @@
                         <img src="https://i.postimg.cc/KzS4mYDz/image.png" 
                              alt="রাজশাহী মহানগর ছাত্রদলের সাংগঠনিক মুহূর্ত - ২" 
                              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                             onerror="this.src='https://placehold.co/600x600/f42a41/ffffff?text=Album+Photo+2'">
+                             onerror="this.src='https://placehold.co/600x500/f42a41/ffffff?text=Album+Photo+2'">
                         <div class="absolute top-3 left-3 bg-bdRed-600/90 backdrop-blur-md text-white text-xs font-bold px-3.5 py-1.5 rounded-full border border-white/25">
                             <i class="fa-solid fa-camera text-white mr-1"></i> সাংগঠনিক মুহূর্ত ০২
                         </div>
@@ -1547,7 +1554,7 @@
         </div>
     </section>
 
-    <!-- EMERGENCY POLICE HELP & SUGGESTION BOX (নতুন যুক্ত করা হয়েছে) -->
+    <!-- EMERGENCY POLICE HELP & PREMIUM QUOTE SECTION -->
     <section id="contact-feedback" class="py-12 sm:py-16 px-4 sm:px-6 relative overflow-hidden bg-slate-50/50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -1579,46 +1586,115 @@
                     </div>
                 </div>
 
-                <!-- Suggestion/Feedback Box (7 cols) -->
-                <div class="lg:col-span-7 ios-card p-6 sm:p-8 border border-bdGreen-600/20 shadow-xl bg-white/90">
-                    <div class="flex items-center gap-3 mb-5 border-b border-slate-100 pb-4">
-                        <span class="w-12 h-12 rounded-2xl bg-bdGreen-50 text-bdGreen-700 flex items-center justify-center text-xl shadow-sm border border-bdGreen-200">
-                            <i class="fa-solid fa-lightbulb"></i>
-                        </span>
-                        <div>
-                            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900">পরামর্শ ও মতামত</h3>
-                            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">ছাত্রদলকে সামনের দিকে এগিয়ে নেওয়ার জন্য আমাদেরকে পরামর্শ দিন</p>
+                <!-- Premium Leader Quote Section (7 cols) -->
+                <div class="lg:col-span-7 relative rounded-[32px] p-1 bg-gradient-to-br from-bdGreen-500 via-amber-400 to-bdRed-500 shadow-2xl group overflow-hidden">
+                    <!-- Inner Deep Glass Container -->
+                    <div class="relative h-full w-full rounded-[28px] bg-slate-950 overflow-hidden p-6 sm:p-10 flex flex-col justify-center z-10">
+                        
+                        <!-- Background Glows -->
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-bdGreen-500/20 blur-[80px] rounded-full pointer-events-none"></div>
+                        <div class="absolute bottom-0 left-0 w-64 h-64 bg-bdRed-500/20 blur-[80px] rounded-full pointer-events-none"></div>
+                        
+                        <!-- Huge Quote Icon Background -->
+                        <i class="fa-solid fa-quote-right absolute -bottom-10 -right-6 text-[160px] sm:text-[180px] text-white/5 rotate-12 pointer-events-none transition-transform group-hover:scale-110 duration-700"></i>
+
+                        <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
+                            
+                            <!-- Image Avatar -->
+                            <div class="shrink-0 flex flex-col items-center">
+                                <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-tr from-amber-300 to-amber-600 shadow-[0_0_40px_rgba(251,191,36,0.35)] group-hover:scale-105 transition-transform duration-700">
+                                    <div class="w-full h-full rounded-full border-4 border-slate-900 overflow-hidden bg-slate-800">
+                                        <img src="https://i.postimg.cc/pL5LF71H/image.png" 
+                                             alt="দেশনায়ক তারেক রহমান" 
+                                             class="w-full h-full object-cover">
+                                    </div>
+                                    <!-- Badge -->
+                                    <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-bdRed-600 to-bdRed-700 text-white text-[10px] sm:text-xs font-bold px-4 py-1.5 rounded-full shadow-lg border border-white/20 whitespace-nowrap">
+                                        দেশনায়ক
+                                    </div>
+                                </div>
+                                <div class="mt-6 text-center">
+                                    <h4 class="text-xl font-extrabold text-white tracking-wide drop-shadow-md">জনাব তারেক রহমান</h4>
+                                    <p class="text-[11px] sm:text-xs font-semibold text-emerald-300 mt-1">প্রধানমন্ত্রী, গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+                                </div>
+                            </div>
+
+                            <!-- Quote Content -->
+                            <div class="flex-1 text-center md:text-left flex flex-col justify-center">
+                                <div class="inline-flex items-center justify-center md:justify-start gap-3 mb-4">
+                                    <span class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/15 shadow-inner">
+                                        <i class="fa-solid fa-quote-left text-xl text-amber-400"></i>
+                                    </span>
+                                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400/80">দিকনির্দেশনামূলক বার্তা</span>
+                                </div>
+                                
+                                <h3 class="text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-white leading-[1.4] tracking-tight drop-shadow-xl mb-6">
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-400">"আমার আগে আমরা,</span> 
+                                    আমাদের আগে দেশ।<br>
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">ক্ষমতার আগে জনতা,</span> 
+                                    সবার আগে বাংলাদেশ।"
+                                </h3>
+                                
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm border-l-4 border-l-amber-400">
+                                    <p class="text-sm sm:text-base text-emerald-50/90 leading-relaxed font-medium">
+                                        রাজশাহী মহানগর ছাত্রদলের প্রতিটি নেতাকর্মীকে এই আদর্শ বুকে ধারণ করে সাধারণ শিক্ষার্থীদের অধিকার আদায় এবং একটি বৈষম্যহীন, গণতান্ত্রিক ও সমৃদ্ধ বাংলাদেশ বিনির্মাণে ঐক্যবদ্ধভাবে কাজ করতে হবে।
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
-                    <form id="suggestionForm" onsubmit="handleSuggestionSubmit(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <input type="text" id="sugName" required placeholder="আপনার নাম"
-                                       class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-bdGreen-600 focus:bg-white focus:outline-none text-sm">
-                            </div>
-                            <div>
-                                <input type="tel" id="sugPhone" placeholder="মোবাইল নাম্বার (ঐচ্ছিক)"
-                                       class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-bdGreen-600 focus:bg-white focus:outline-none text-sm">
-                            </div>
-                        </div>
-                        <div>
-                            <textarea id="sugMessage" required rows="3" placeholder="সংগঠনের উন্নয়ন ও ভবিষ্যৎ রূপরেখা নিয়ে আপনার গঠনমূলক পরামর্শ এখানে লিখুন..."
-                                      class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-bdGreen-600 focus:bg-white focus:outline-none text-sm resize-y"></textarea>
-                        </div>
-                        
-                        <div id="suggestionSuccess" class="hidden p-3 rounded-xl bg-bdGreen-50 border border-bdGreen-600/30 text-bdGreen-800 text-xs font-bold text-center">
-                            <i class="fa-solid fa-check-circle text-bdGreen-600 mr-1"></i> আপনার মূল্যবান পরামর্শের জন্য ধন্যবাদ!
-                        </div>
-
-                        <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-bdGreen-600 to-bdGreen-700 hover:from-bdGreen-700 hover:to-bdGreen-800 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>পরামর্শ জমা দিন</span>
-                        </button>
-                    </form>
                 </div>
 
             </div>
+        </div>
+    </section>
+
+    <!-- MESSAGE / LETTER BOX SECTION -->
+    <section id="send-letter" class="py-10 px-4 sm:px-6 relative overflow-hidden bg-slate-50/50">
+        <div class="max-w-4xl mx-auto ios-card p-6 sm:p-10 border-2 border-amber-400/30 shadow-2xl bg-white/95 relative overflow-hidden group">
+            <!-- Background decoration -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-amber-400/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-bdGreen-600/10 blur-3xl pointer-events-none"></div>
+
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-100 pb-5 relative z-10">
+                <span class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center text-2xl shadow-lg">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </span>
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">আমাদেরকে এগিয়ে নিতে চিঠি দিন</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">আপনার গঠনমূলক পরামর্শ ও মতামত সরাসরি আমাদের কাছে পাঠান</p>
+                </div>
+            </div>
+
+            <form id="suggestionForm" onsubmit="handleSuggestionSubmit(event)" class="space-y-5 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">আপনার নাম <span class="text-bdRed-600">*</span></label>
+                        <input type="text" id="sugName" required placeholder="আপনার পূর্ণ নাম"
+                               class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:bg-white focus:outline-none text-sm transition-all shadow-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">মোবাইল নাম্বার</label>
+                        <input type="tel" id="sugPhone" placeholder="মোবাইল নাম্বার (ঐচ্ছিক)"
+                               class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:bg-white focus:outline-none text-sm transition-all shadow-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">আপনার বার্তা / চিঠি <span class="text-bdRed-600">*</span></label>
+                    <textarea id="sugMessage" required rows="4" placeholder="সংগঠনের উন্নয়ন ও ভবিষ্যৎ রূপরেখা নিয়ে আপনার মতামত এখানে বিস্তারিত লিখুন..."
+                              class="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:bg-white focus:outline-none text-sm resize-y transition-all shadow-sm"></textarea>
+                </div>
+                
+                <div id="suggestionSuccess" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-500/30 text-emerald-800 text-sm font-bold text-center shadow-inner">
+                    <i class="fa-solid fa-check-circle text-emerald-600 mr-2"></i> আপনার চিঠি সফলভাবে আমাদের কাছে পৌঁছেছে! ধন্যবাদ।
+                </div>
+
+                <button type="submit" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-bdGreen-600 to-bdGreen-800 hover:from-bdGreen-700 hover:to-bdGreen-900 text-white font-extrabold text-base shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>চিঠিটি সরাসরি প্রেরণ করুন</span>
+                </button>
+            </form>
         </div>
     </section>
 
@@ -1661,7 +1737,7 @@
                         </div>
                     </div>
                     <p class="text-sm text-emerald-100/80 leading-relaxed max-w-md">
-                        বাংলাদেশ জাতীয়তাবাদী ছাত্রদল, রাজশাহী মহানগর শাখা। সাধারণ শিক্ষার্থীদের অধিকার আদায়, গণতন্ত্র রক্ষা এবং আদর্শিক ছাত্ররাজনীতির নির্ভরযোগ্য ঠিকানা।
+                        বাংলাদেশ জাতীয়তাবাদী ছাত্রদল, রাজশাহী মহানগর শাখা। সাধারণ শিক্ষার্থীদের অধিকার আদায়, গণতন্ত্র রক্ষা এবং আদর্শিক ছাত্ররাজনীতির নির্ভরযোগ্য ঠিকানা।
                     </p>
                 </div>
 
@@ -1699,7 +1775,7 @@
             </div>
 
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-200/70">
-                <p>© ২০২৬ বাংলাদেশ জাতীয়তাবাদী ছাত্রদল — রাজশাহী মহানগর শাখা। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p>© ২০২৬ বাংলাদেশ জাতীয়তাবাদী ছাত্রদল — রাজশাহী মহানগর শাখা। সর্বস্বত্ব সংরক্ষিত।</p>
                 <p class="flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-bdGreen-500"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-bdRed-500"></span>
@@ -1716,16 +1792,6 @@
 
         </div>
     </footer>
-
-    <!-- FLOATING EMERGENCY BLOOD QUICK-ACTION BUTTON -->
-    <a href="#blood-wing" 
-       aria-label="জরুরি রক্ত প্রয়োজন"
-       class="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-gradient-to-r from-bdRed-600 via-bdRed-500 to-bdGreen-700 text-white font-extrabold text-xs sm:text-sm shadow-2xl border-2 border-white/80 hover:scale-105 active:scale-95 transition-all">
-        <span class="w-7 h-7 rounded-full bg-white text-bdRed-600 flex items-center justify-center shadow">
-            <i class="fa-solid fa-droplet heartbeat-icon"></i>
-        </span>
-        <span>জরুরি রক্ত প্রয়োজন?</span>
-    </a>
 
     <!-- FULLSCREEN IMAGE LIGHTBOX MODAL (ছবি ও বিজ্ঞপ্তি বড় করে দেখার মডাল) -->
     <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/92 backdrop-blur-2xl flex-col items-center justify-center p-3 sm:p-6">
@@ -1800,7 +1866,7 @@
                 <div id="linkList" style="display: flex; flex-direction: column; gap: 10px;"></div>
             </div>
 
-            <!-- Feedback & Suggestions Viewer Section -->
+            <!-- Feedback & Suggestions Viewer Section (Live from letter box) -->
             <div style="margin-top: 30px; border-top: 1px solid #334155; padding-top: 25px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <h3 style="color: #fbbf24; font-size: 16px; font-weight: bold; margin: 0;"><i class="fa-solid fa-envelope-open-text"></i> প্রাপ্ত পরামর্শ ও মতামত</h3>
@@ -1845,7 +1911,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Suggestion Form Handler (Live Database)
+        // Suggestion/Letter Form Handler (Live Database)
         function handleSuggestionSubmit(e) {
             e.preventDefault();
             
