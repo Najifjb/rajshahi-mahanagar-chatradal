@@ -222,6 +222,16 @@
 
 <body class="bd-mesh-bg min-h-screen flex flex-col selection:bg-bdRed-500 selection:text-white">
 
+    <!-- WEBSITE PRELOADER -->
+    <div id="website-preloader" class="fixed inset-0 z-[999999] bg-bdGreen-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-white p-3 shadow-[0_15px_35px_rgba(0,106,78,0.2)] border-4 border-bdGreen-600 flex items-center justify-center animate-bounce">
+            <img src="https://i.postimg.cc/PrbR366r/logo.png" alt="Loading" class="w-full h-full object-contain animate-pulse">
+            <div class="absolute -inset-2 rounded-full border-4 border-bdRed-500 border-t-transparent animate-spin"></div>
+        </div>
+        <h3 class="mt-6 text-lg sm:text-2xl font-extrabold text-bdGreen-800 tracking-wider animate-pulse drop-shadow-sm">রাজশাহী মহানগর ছাত্রদল</h3>
+        <p class="text-xs sm:text-sm font-bold text-bdRed-600 mt-1.5 animate-pulse">লোডিং হচ্ছে...</p>
+    </div>
+
     <!-- TOP SLOGAN BAR (স্লোগান ব্যানার) -->
     <div class="bg-gradient-to-r from-bdGreen-800 via-bdGreen-600 to-bdRed-600 text-white py-2.5 px-4 shadow-md relative z-50 border-b border-white/15">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-medium">
@@ -288,12 +298,8 @@
             <!-- Right Action Button & Mobile Menu Trigger -->
             <div class="flex items-center gap-2.5">
                 <!-- Facebook Icon -->
-                <a href="https://www.facebook.com/share/1BjfxtTNEw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all border border-[#1877F2]/20 shadow-sm">
+                <a href="https://www.facebook.com/profile.php?id=61573290383358" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all border border-[#1877F2]/20 shadow-sm">
                     <i class="fa-brands fa-facebook-f text-sm sm:text-base"></i>
-                </a>
-                <a href="#blood-wing" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-bdRed-600 via-bdRed-500 to-bdGreen-600 text-white text-sm font-bold shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
-                    <i class="fa-solid fa-hand-holding-medical text-xs"></i>
-                    <span>জরুরি রক্ত প্রয়োজন?</span>
                 </a>
                 <button id="mobileMenuBtn" aria-label="মেনু খুলুন" class="lg:hidden w-11 h-11 rounded-full bg-bdGreen-600/10 text-bdGreen-800 flex items-center justify-center hover:bg-bdGreen-600 hover:text-white transition-colors">
                     <i class="fa-solid fa-bars-staggered text-lg"></i>
@@ -304,7 +310,7 @@
         <!-- Mobile Glass Dropdown Menu -->
         <div id="mobileMenu" class="hidden lg:hidden max-w-7xl mx-auto mt-2 ios-glass rounded-3xl p-4 shadow-2xl border border-white/80">
             <div class="grid grid-cols-2 gap-2 text-sm font-semibold">
-                <a href="https://www.facebook.com/share/1BjfxtTNEw/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="mobile-nav-link flex items-center gap-2 p-3 rounded-2xl hover:bg-blue-50 text-[#1877F2]">
+                <a href="https://www.facebook.com/profile.php?id=61573290383358" target="_blank" rel="noopener noreferrer" class="mobile-nav-link flex items-center gap-2 p-3 rounded-2xl hover:bg-blue-50 text-[#1877F2]">
                     <i class="fa-brands fa-facebook text-lg"></i> ফেসবুক পেজ
                 </a>
                 <a href="#home" class="mobile-nav-link flex items-center gap-2 p-3 rounded-2xl bg-bdGreen-600/10 text-bdGreen-800">
@@ -361,12 +367,12 @@
                         <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.18] tracking-tight">
                             বাংলাদেশ জাতীয়তাবাদী ছাত্রদল
                             <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-rose-200">
-                                রাজশাহী মহানগর
+                                রাজশাহী মহানগর শাখা
                             </span>
                         </h2>
 
                         <p class="text-base sm:text-lg text-emerald-50/90 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
-                            উত্তরাঞ্চলের শিক্ষানগরী রাজশাহীর রাজপথ ও শিক্ষাঙ্গনে সাধারণ শিক্ষার্থীদের অধিকার আদায়, গণতন্ত্র পুনরুদ্ধার এবং মেধা ও মননের সমন্বয়ে দেশপ্রেমিক নেতৃত্ব গড়ে তোলার অন্যতম প্রধান ছাত্র সংগঠন।
+                            উত্তরবঙ্গের শিক্ষানগরী রাজশাহীর রাজপথ ও শিক্ষাঙ্গনে সাধারণ শিক্ষার্থীদের অধিকার আদায়, গণতন্ত্র পুনরুদ্ধার এবং মেধা ও মননের সমন্বয়ে দেশপ্রেমিক নেতৃত্ব গড়ে তোলার অন্যতম প্রধান ছাত্র সংগঠন।
                         </p>
 
                         <!-- Action Buttons -->
@@ -1271,7 +1277,7 @@
                     রাজশাহী মহানগর ছাত্রদল সম্পর্কে বিস্তারিত
                 </h2>
                 <p class="mt-3 text-slate-600 text-base sm:text-lg">
-                    উত্তরাঞ্চলের ছাত্ররাজনীতি এবং রাজশাহী মহানগরীতে গণতন্ত্র, শিক্ষা ও অধিকার আদায়ের আন্দোলনে জাতীয়তাবাদী ছাত্রদলের ভূমিকা ও সাংগঠনিক বৈশিষ্ট্য।
+                    উত্তরবঙ্গের ছাত্ররাজনীতি এবং রাজশাহী মহানগরীতে গণতন্ত্র, শিক্ষা ও অধিকার আদায়ের আন্দোলনে জাতীয়তাবাদী ছাত্রদলের ভূমিকা ও সাংগঠনিক বৈশিষ্ট্য।
                 </p>
             </div>
 
@@ -1287,7 +1293,7 @@
                         </div>
                         <span class="text-xs font-bold uppercase tracking-wider text-bdGreen-700">জেলা সমমর্যাদার গুরুত্বপূর্ণ ইউনিট</span>
                         <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">
-                            উত্তরাঞ্চলের ছাত্ররাজনীতির অন্যতম প্রধান চালিকাশক্তি
+                            উত্তরবঙ্গের ছাত্ররাজনীতির অন্যতম প্রধান চালিকাশক্তি
                         </h3>
                         <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
                             <strong>রাজশাহী মহানগর জাতীয়তাবাদী ছাত্রদল</strong> সরাসরি কেন্দ্রীয় সংসদের তত্ত্বাবধানে পরিচালিত একটি অত্যন্ত শক্তিশালী ইউনিট। শিক্ষানগরী হিসেবে পরিচিত রাজশাহীতে অসংখ্য ঐতিহ্যবাহী কলেজ ও শিক্ষাপ্রতিষ্ঠান থাকায় মহানগর ছাত্রদল কেবল স্থানীয় রাজনীতিতেই নয়, বরং সমগ্র উত্তরবঙ্গের জাতীয়তাবাদী আন্দোলনের কেন্দ্রবিন্দু হিসেবে কাজ করে।
@@ -1353,7 +1359,7 @@
                     </p>
                     <ul class="space-y-2 text-sm text-slate-700 font-medium">
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bdRed-500"></i> বিভাগীয় মহাসমাবেশ ও রোডমার্চে মূল শক্তির জোগানদাতা</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bdRed-500"></i> আগামী দিনের জাতীয় ও স্থানীয় নেতৃত্বের সূতিকাগার</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bdRed-500"></i> আগামী দিনের জাতীয় ও স্থানীয় নেতৃত্বের সূতিকাগার</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bdRed-500"></i> জুলাই-আগস্ট গণ-অভ্যুত্থান ও বৈষম্যহীন সমাজ বিনির্মাণে সক্রিয় অংশগ্রহণ</li>
                     </ul>
                 </div>
@@ -1410,8 +1416,8 @@
                         <span class="px-3 py-1 rounded-full bg-bdRed-100 text-bdRed-700 text-xs font-bold">সরকারি কলেজ ইউনিট</span>
                         <i class="fa-solid fa-graduation-cap text-bdRed-500 text-xl"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-slate-900">রাজশাহী সরকারি সিটি কলেজ</h4>
-                    <p class="text-sm text-slate-600 mt-1">নগরীর কেন্দ্রস্থলে অবস্থিত সরকারি সিটি কলেজ ছাত্রদল রাজপথ ও ক্যাম্পাসের প্রতিটি কর্মসূচিতে অগ্রণী ভূমিকা রাখে।</p>
+                    <h4 class="text-lg font-bold text-slate-900">রাজশাহী নিউ গভঃ ডিগ্রি কলেজ</h4>
+                    <p class="text-sm text-slate-600 mt-1">মহানগরীর অন্যতম বৃহৎ এই সরকারি কলেজে ছাত্রদলের সুসংগঠিত ও সক্রিয় ছাত্র নেতৃত্ব রয়েছে।</p>
                 </div>
 
                 <div class="ios-card p-6 border-l-4 border-l-bdGreen-600">
@@ -1419,8 +1425,8 @@
                         <span class="px-3 py-1 rounded-full bg-bdGreen-100 text-bdGreen-800 text-xs font-bold">সরকারি কলেজ ইউনিট</span>
                         <i class="fa-solid fa-book-open-reader text-bdGreen-600 text-xl"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-slate-900">রাজশাহী নিউ গভঃ ডিগ্রি কলেজ</h4>
-                    <p class="text-sm text-slate-600 mt-1">মহানগরীর অন্যতম বৃহৎ এই সরকারি কলেজে ছাত্রদলের সুসংগঠিত ও সক্রিয় ছাত্র নেতৃত্ব রয়েছে।</p>
+                    <h4 class="text-lg font-bold text-slate-900">রাজশাহী সরকারি সিটি কলেজ</h4>
+                    <p class="text-sm text-slate-600 mt-1">নগরীর কেন্দ্রস্থলে অবস্থিত সরকারি সিটি কলেজ ছাত্রদল রাজপথ ও ক্যাম্পাসের প্রতিটি কর্মসূচিতে অগ্রণী ভূমিকা রাখে।</p>
                 </div>
 
                 <div class="ios-card p-6 border-l-4 border-l-bdRed-500">
@@ -1705,6 +1711,47 @@
         </div>
     </section>
 
+    <!-- FACEBOOK LIVE FEED SECTION -->
+    <section id="facebook-feed" class="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden bg-slate-50/80 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1877F2]/10 text-[#1877F2] font-bold text-xs sm:text-sm border border-[#1877F2]/20 mb-3 shadow-sm">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>আমাদের অফিসিয়াল লাইভ আপডেট</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    ফেসবুক পেজ ফিড
+                </h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">
+                    সংগঠনের সর্বশেষ কর্মসূচি, নোটিশ ও লাইভ ইভেন্টের সকল আপডেট জানতে আমাদের ফেসবুক পেজের সাথে যুক্ত থাকুন।
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto flex flex-col items-center">
+                <!-- FB iframe Wrapper with iOS Card Style -->
+                <div class="w-full bg-white rounded-3xl shadow-2xl border-4 border-[#1877F2]/10 overflow-hidden flex justify-center p-2 sm:p-4 mb-6 relative">
+                    <!-- Background decoration inside card -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#1877F2]/5 rounded-full blur-2xl"></div>
+                    
+                    <div class="w-full flex justify-center overflow-x-auto custom-scrollbar rounded-xl relative z-10">
+                        <!-- FB Page Embed Code Placeholder -->
+                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61573290383358&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+                                width="500" height="600" style="border:none;overflow:hidden; max-width:100%; border-radius: 12px;" 
+                                scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Direct Link Button -->
+                <a href="https://www.facebook.com/profile.php?id=61573290383358" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-2xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-extrabold text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-3">
+                    <i class="fa-brands fa-facebook-f text-lg"></i>
+                    <span>সরাসরি ফেসবুক পেজে ভিজিট করুন</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- DYNAMIC ALBUM GALLERY SECTION -->
     <section id="dynamic-gallery-section" class="py-16 sm:py-20 px-4 sm:px-6 relative overflow-hidden bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto">
@@ -1779,7 +1826,7 @@
                     </div>
                 </div>
 
-                <!-- QR Code Column (NEW) -->
+                <!-- QR Code Column -->
                 <div class="md:col-span-2 space-y-3 flex flex-col sm:items-end md:items-center">
                     <h4 class="text-sm font-bold uppercase tracking-wider text-amber-300">ওয়েবসাইট স্ক্যানার</h4>
                     <div class="p-2.5 bg-white/95 rounded-2xl shadow-xl inline-block border border-amber-300/30">
@@ -1916,6 +1963,17 @@
 
     <!-- Interactive Scripts -->
     <script>
+        // Website Preloader Logic
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('website-preloader');
+                if(preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { preloader.style.display = 'none'; }, 500);
+                }
+            }, 1200); // 1.2s delay for premium feel
+        });
+
         // --- Initialize Firebase ---
         const firebaseConfig = {
             apiKey: "AIzaSyAhyJ8iM2YraIAyipdZWCTJC34ZrDeq_eA",
